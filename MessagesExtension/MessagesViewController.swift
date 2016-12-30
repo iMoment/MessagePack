@@ -13,21 +13,44 @@ import Messages
 class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var introPicker: UIPickerView = UIPickerView()
+    var dummyArray = ["Stanley", "Hyung", "Woobear", "Sanghwa"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // Deal with compression and recognition of app screen as app drawer
+        Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.addIntroPicker), userInfo: nil, repeats: false)
+    }
+    
+    func addIntroPicker() {
+        introPicker.delegate = self
+        introPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.view.addSubview(introPicker)
+        introPicker.backgroundColor = .clear
+        
     }
     
     // MARK: PickerView delegate and datasource methods
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return dummyArray.count
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let labelView = UILabel()
+        labelView.text = dummyArray[row]
+        labelView.adjustsFontSizeToFitWidth = true
+        labelView.font = UIFont(name: "Arial", size: 20)
+        labelView.textAlignment = .center
+        
+        return labelView
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

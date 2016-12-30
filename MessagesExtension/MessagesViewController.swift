@@ -9,11 +9,24 @@
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+// Will use pickerview
+class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var introPicker: UIPickerView = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    // MARK: PickerView delegate and datasource methods
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
     }
     
     override func didReceiveMemoryWarning() {

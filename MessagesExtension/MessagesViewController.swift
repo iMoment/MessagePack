@@ -13,12 +13,12 @@ import Messages
 class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var introPicker: UIPickerView = UIPickerView()
-    var dummyArray = ["Stanley", "Hyung", "Woobear", "Sanghwa"]
+    var dummyArray = ["dr-mundo", "ezreal", "shen", "thresh", "vayne"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Deal with compression and recognition of app screen as app drawer
+        // Deal with compression and recognition of app screen as an app drawer
         Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.addIntroPicker), userInfo: nil, repeats: false)
     }
     
@@ -39,18 +39,39 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
         return dummyArray.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         
-        let labelView = UILabel()
-        labelView.text = dummyArray[row]
-        labelView.adjustsFontSizeToFitWidth = true
-        labelView.font = UIFont(name: "Arial", size: 20)
-        labelView.textAlignment = .center
-        
-        return labelView
+        if pickerView == introPicker {
+            return 100
+        } else {
+            return 100
+        }
     }
     
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return self.view.bounds.width / 2
+    }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+//        let labelView = UILabel()
+//        labelView.text = dummyArray[row]
+//        labelView.adjustsFontSizeToFitWidth = true
+//        labelView.font = UIFont(name: "Arial", size: 20)
+//        labelView.textAlignment = .center
+//        
+//        return labelView
+        
+        let imageName: String = dummyArray[row] + ".png"
+        let stickerImageView = UIImageView(image: UIImage(named: imageName))
+        stickerImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        
+        return stickerImageView
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(dummyArray[row])
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

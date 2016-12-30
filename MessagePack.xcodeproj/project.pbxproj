@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		916945381E1661CF003B55F0 /* dr-mundo.png in Resources */ = {isa = PBXBuildFile; fileRef = 916945331E1661CF003B55F0 /* dr-mundo.png */; };
+		916945391E1661CF003B55F0 /* ezreal.png in Resources */ = {isa = PBXBuildFile; fileRef = 916945341E1661CF003B55F0 /* ezreal.png */; };
+		9169453A1E1661CF003B55F0 /* shen.png in Resources */ = {isa = PBXBuildFile; fileRef = 916945351E1661CF003B55F0 /* shen.png */; };
+		9169453B1E1661CF003B55F0 /* thresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 916945361E1661CF003B55F0 /* thresh.png */; };
+		9169453C1E1661CF003B55F0 /* vayne.png in Resources */ = {isa = PBXBuildFile; fileRef = 916945371E1661CF003B55F0 /* vayne.png */; };
 		919099391E164707004D2AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 919099381E164707004D2AFA /* Assets.xcassets */; };
 		919099401E164707004D2AFA /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9190993F1E164707004D2AFA /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		919099451E164707004D2AFA /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919099441E164707004D2AFA /* Messages.framework */; };
@@ -40,6 +45,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		916945331E1661CF003B55F0 /* dr-mundo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dr-mundo.png"; sourceTree = "<group>"; };
+		916945341E1661CF003B55F0 /* ezreal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ezreal.png; sourceTree = "<group>"; };
+		916945351E1661CF003B55F0 /* shen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shen.png; sourceTree = "<group>"; };
+		916945361E1661CF003B55F0 /* thresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thresh.png; sourceTree = "<group>"; };
+		916945371E1661CF003B55F0 /* vayne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vayne.png; sourceTree = "<group>"; };
 		919099351E164707004D2AFA /* MessagePack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessagePack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		919099381E164707004D2AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9190993A1E164707004D2AFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +73,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		916945321E1661A8003B55F0 /* Avatars */ = {
+			isa = PBXGroup;
+			children = (
+				916945331E1661CF003B55F0 /* dr-mundo.png */,
+				916945341E1661CF003B55F0 /* ezreal.png */,
+				916945351E1661CF003B55F0 /* shen.png */,
+				916945361E1661CF003B55F0 /* thresh.png */,
+				916945371E1661CF003B55F0 /* vayne.png */,
+			);
+			name = Avatars;
+			sourceTree = "<group>";
+		};
 		9190992E1E164707004D2AFA = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +124,7 @@
 		919099461E164707004D2AFA /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				916945321E1661A8003B55F0 /* Avatars */,
 				919099471E164707004D2AFA /* MessagesViewController.swift */,
 				919099491E164707004D2AFA /* MainInterface.storyboard */,
 				9190994C1E164707004D2AFA /* Assets.xcassets */,
@@ -199,7 +222,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916945391E1661CF003B55F0 /* ezreal.png in Resources */,
+				9169453A1E1661CF003B55F0 /* shen.png in Resources */,
+				916945381E1661CF003B55F0 /* dr-mundo.png in Resources */,
+				9169453B1E1661CF003B55F0 /* thresh.png in Resources */,
 				9190994D1E164707004D2AFA /* Assets.xcassets in Resources */,
+				9169453C1E1661CF003B55F0 /* vayne.png in Resources */,
 				9190994B1E164707004D2AFA /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +427,7 @@
 				919099531E164707004D2AFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		919099551E164707004D2AFA /* Build configuration list for PBXNativeTarget "MessagePack" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +436,7 @@
 				919099571E164707004D2AFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

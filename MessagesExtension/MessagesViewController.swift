@@ -14,19 +14,50 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
     
     var introPicker: UIPickerView = UIPickerView()
     var dummyArray = ["dr-mundo", "ezreal", "shen", "thresh", "vayne"]
+    var startButton: UIButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Deal with compression and recognition of app screen as an app drawer
-        Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.addIntroPicker), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.initialSetup), userInfo: nil, repeats: false)
+    }
+    
+    func initialSetup() {
+        addIntroPicker()
+        addStartButton()
     }
     
     func addIntroPicker() {
         introPicker.delegate = self
-        introPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        introPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
         self.view.addSubview(introPicker)
         introPicker.backgroundColor = .clear
+    }
+    
+    func addStartButton() {
+        startButton = UIButton(type: .custom)
+        startButton.frame = CGRect(x: (self.view.bounds.width / 2) + 20, y: self.view.bounds.height / 2, width: (self.view.bounds.width / 2) - 40, height: 30)
+        startButton.addTarget(self, action: #selector(self.pressedStart), for: .touchUpInside)
+        startButton.setTitle("Caption This", for: .normal)
+        startButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        startButton.titleLabel?.font = UIFont(name: "Arial", size: 20)
+        startButton.setTitleColor(.black, for: .normal)
+        //startButton.backgroundColor = UIColor(colorLiteralRed: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+        startButton.backgroundColor = .yellow
+        
+        startButton.layer.borderWidth = 2.0
+        startButton.layer.borderColor = (UIColor.black).cgColor
+        startButton.layer.masksToBounds = false
+        startButton.layer.shadowRadius = 5.0
+        startButton.layer.shadowOpacity = 0.3
+        startButton.layer.shadowOffset = CGSize(width: 0, height: 5)
+        startButton.layer.shadowColor = (UIColor.black).cgColor
+        
+        self.view.insertSubview(startButton, aboveSubview: introPicker)
+    }
+    
+    func pressedStart() {
         
     }
     
@@ -124,6 +155,33 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
         // Called after the extension transitions to a new presentation style.
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
+        if presentationStyle == .compact {
+            
+        }
     }
-
+    
+    func repositionForCompact() {
+        
+    }
+    
+    func repositionForExpanded() {
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

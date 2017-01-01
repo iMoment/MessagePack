@@ -43,7 +43,6 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
         startButton.titleLabel?.adjustsFontSizeToFitWidth = true
         startButton.titleLabel?.font = UIFont(name: "Arial", size: 20)
         startButton.setTitleColor(.black, for: .normal)
-        //startButton.backgroundColor = UIColor(colorLiteralRed: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         startButton.backgroundColor = .yellow
         
         startButton.layer.borderWidth = 2.0
@@ -156,16 +155,26 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
         if presentationStyle == .compact {
-            
+            repositionForCompact()
+        } else if presentationStyle == .expanded {
+            repositionForExpanded()
         }
     }
     
     func repositionForCompact() {
-        
+        UIView.animate(withDuration: 1, animations: {
+            self.introPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+            
+            self.startButton.frame = CGRect(x: (self.view.bounds.width / 2) + 20, y: self.view.bounds.height / 2, width: (self.view.bounds.width / 2) - 40, height: 30)
+        })
     }
     
     func repositionForExpanded() {
-        
+        UIView.animate(withDuration: 1, animations: {
+            self.introPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+            
+            self.startButton.frame = CGRect(x: (self.view.bounds.width / 2) + 20, y: self.view.bounds.height / 2, width: (self.view.bounds.width / 2) - 40, height: 30)
+        })
     }
 }
 

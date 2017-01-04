@@ -13,8 +13,10 @@ import Messages
 class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var introPicker: UIPickerView = UIPickerView()
-    var dummyArray = ["dr-mundo", "ezreal", "shen", "thresh", "vayne"]
+    var emojiPicker: UIPickerView = UIPickerView()
+    var emojiArray = [String]()
     var startButton: UIButton = UIButton()
+    var inEmojiMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +26,21 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
     }
     
     func initialSetup() {
+        inEmojiMode = false
+        
+        parsePropertyList()
         addIntroPicker()
         addStartButton()
+    }
+    
+    func parsePropertyList() {
+        if let path = Bundle.main.path(forResource: "EmojiList", ofType: "plist") {
+           let dictionary: NSDictionary = NSDictionary(contentsOfFile: path)!
+            
+            if dictionary.object(forKey: "Emoji") != nil {
+                emojiArray = dictionary.object(forKey: "Emoji") as! [String]
+            }
+        }
     }
     
     func addIntroPicker() {
@@ -57,16 +72,43 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
     }
     
     func pressedStart() {
+        introPicker.removeFromSuperview()
+        startButton.removeFromSuperview()
+        inEmojiMode = true
+        
+        self.requestPresentationStyle(.expanded)
+    }
+    
+    func setupEmojiMode() {
+        addEmojiPicker()
+    }
+    
+    func addEmojiPicker() {
+        self.emojiPicker.delegate = self
+        emojiPicker.frame = CGRect(x: 5, y: 85, width: self.view.bounds.width - 10, height: self.view.bounds.height / 2)
+        self.view.addSubview(emojiPicker)
+        emojiPicker.backgroundColor = .clear
         
     }
     
     // MARK: PickerView delegate and datasource methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        
+        if pickerView == introPicker {
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dummyArray.count
+        
+        if pickerView == introPicker {
+            return emojiArray.count
+        } else {
+            // Dummy return statement
+            return 10
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -84,23 +126,37 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-//        let labelView = UILabel()
-//        labelView.text = dummyArray[row]
-//        labelView.adjustsFontSizeToFitWidth = true
-//        labelView.font = UIFont(name: "Arial", size: 20)
-//        labelView.textAlignment = .center
-//        
-//        return labelView
-        
-        let imageName: String = dummyArray[row] + ".png"
-        let stickerImageView = UIImageView(image: UIImage(named: imageName))
-        stickerImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
-        return stickerImageView
+        if pickerView == introPicker {
+            let imageName: String = emojiArray[row] + ".png"
+            let stickerImageView = UIImageView(image: UIImage(named: imageName))
+            stickerImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
+            return stickerImageView
+            
+        } else {
+            if component == 0 {
+                let labelView = UILabel()
+                labelView.text = "Component 1 Row" + String(row)
+                labelView.adjustsFontSizeToFitWidth = true
+                labelView.font = UIFont(name: "Arial", size: 20)
+                labelView.textAlignment = .center
+                
+                return labelView
+                
+            } else {
+                let labelView = UILabel()
+                labelView.text = "Component 2 Row" + String(row)
+                labelView.adjustsFontSizeToFitWidth = true
+                labelView.font = UIFont(name: "Arial", size: 20)
+                labelView.textAlignment = .center
+                
+                return labelView
+            }
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(dummyArray[row])
+//        print(emojiArray[row])
     }
     
     override func didReceiveMemoryWarning() {
@@ -154,10 +210,18 @@ class MessagesViewController: MSMessagesAppViewController, UIPickerViewDelegate,
         // Called after the extension transitions to a new presentation style.
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
-        if presentationStyle == .compact {
-            repositionForCompact()
-        } else if presentationStyle == .expanded {
-            repositionForExpanded()
+        if inEmojiMode == false {
+            if presentationStyle == .compact {
+                repositionForCompact()
+            } else if presentationStyle == .expanded {
+                repositionForExpanded()
+            }
+        } else {
+            // In mode to customize emoji
+            if emojiPicker.superview == nil {
+                print("Setup emoji mode")
+                setupEmojiMode()
+            }
         }
     }
     
